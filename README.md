@@ -1,13 +1,12 @@
-###vue-cli-plugin-h5
+# vue-cli-public-h5
 
-##嵌入原声APP应用的H5页面
+vue-cli-public-h5 自动生成H5项目固定模板
 
 
-## 使用方法
+# 快速使用
 
-# npm install --save-dev vue-cli-plugin-h5
+```bash
+$ npm i --save-dev vue-cli-plugin-h5
+$ vue invoke vue-cli-plugin-h5
 
-# vue invoke vue-cli-plugin-h5
-
-# 注意
-# 您需要手动配置代理
+```
