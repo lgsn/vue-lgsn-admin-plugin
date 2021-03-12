@@ -1,6 +1,8 @@
 const customizeConfig = require('./customizeConfig')
 
-module.exports = (api) => {
+module.exports = (api, options) => {
+
+  if (!options.init) return
 
   // 配置文件
   customizeConfig()
