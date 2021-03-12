@@ -1,4 +1,9 @@
+const customizeConfig = require('./customizeConfig')
+
 module.exports = (api) => {
+
+  // 配置文件
+  customizeConfig()
 
   // 添加配置文件
   api.extendPackage({

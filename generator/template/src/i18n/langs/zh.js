@@ -1,3 +1,3 @@
-module.exports = {
-    title: '中文'
-};
+export default {
+  title: '中文'
+}
