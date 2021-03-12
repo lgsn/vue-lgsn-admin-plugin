@@ -1,3 +1,8 @@
+/**
+ * @Description: 
+ * @author Guan LinTao
+ * @date 4:34 下午 
+*/
 const customizeConfig = require('./customizeConfig')
 
 module.exports = (api, options) => {
