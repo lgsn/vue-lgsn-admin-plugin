@@ -1,0 +1,8 @@
+{
+  "name": "vue-cli-plugin-h5",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "kaiguan",
+  "license": "MIT License",
+  "private": false
+}
