@@ -51,15 +51,7 @@ module.exports = {
     devServer: {
         proxy: {
             '/api': {
-                // target: 'http://tapi.loanunion.in',
-                // target: 'http://192.168.6.160:8001', // 家具
-                // target: 'http://192.168.6.179:8001', // 关于
-                target: 'http://tapi.perfso.mx/', // 关于
-                changeOrigin: true
-            },
-            '/channel': {
-                target: 'http://192.168.6.122:8001', // 家具
-                // target: 'http://192.168.6.160:8001', // 关于
+                target: 'http://192.168.6.120/h5',
                 changeOrigin: true
             }
         }
