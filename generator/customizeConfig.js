@@ -1,7 +1,7 @@
 /**
- * @Description: 
+ * @Description:
  * @author Guan LinTao
- * @date 4:34 下午 
+ * @date 4:34 下午
 */
 const fs = require('fs')
 const path = require('path')
@@ -27,4 +27,6 @@ module.exports = function () {
       }
     })
   })
+
+  console.log('🚁 vue-cli-plugin-h5 项目目录初始化完成')
 }
