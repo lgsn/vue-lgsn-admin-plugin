@@ -1,7 +1,7 @@
 /**
- * @Description: 
+ * @Description:
  * @author Guan LinTao
- * @date 4:34 下午 
+ * @date 4:34 下午
 */
 const customizeConfig = require('./customizeConfig')
 
@@ -15,20 +15,27 @@ module.exports = (api, options) => {
   // 添加配置文件
   api.extendPackage({
     dependencies: {
-      'vue-wechat-title': '^2.0.5',
-      "vue-router": "^3.0.1",
-      "vue-i18n": "8.21.1",
-      "js-md5": "^0.7.3",
-      "vant": "^2.10.2",
-      "axios": "^0.19.0"
+      "ant-design-vue": "^1.7.3",
+      "axios": "^0.21.1",
+      "core-js": "^3.6.5",
+      "crypto-js": "^4.0.0",
+      "element-ui": "^2.15.1",
+      "js-cookie": "^2.2.1",
+      "vue": "^2.6.11",
+      "vue-router": "^3.5.1",
+      "vuex": "^3.6.2"
     },
     devDependencies: {
-      "node-sass": "^4.9.2",
-      "sass": "^1.18.0",
-      "sass-loader": "^7.1.0",
-      "babel-plugin-import": "^1.12.0",
-      "compression-webpack-plugin": "^3.1.0",
-      "style-loader": "^0.23.1"
+      "@vue/cli-plugin-babel": "^4.5.0",
+      "@vue/cli-plugin-eslint": "^4.5.0",
+      "@vue/cli-service": "^4.5.0",
+      "babel-eslint": "7.2.3",
+      "crypto-js": "^4.0.0",
+      "eslint": "^6.7.2",
+      "eslint-plugin-vue": "^6.2.2",
+      "sass": "^1.32.8",
+      "sass-loader": "^8.0.0",
+      "vue-template-compiler": "^2.6.11"
     }
   })
 

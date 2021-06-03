@@ -1,22 +1,21 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import i18n from "./i18n"
-import * as Util from './utils/utils'
-import http from './utils/ajax';
-import VueWechatTitle from 'vue-wechat-title'
-
-import './assets/css/reset.scss'
+import store from './store'
+import './utils/antComponents'
+import './styles/index.scss'
+import 'ant-design-vue/dist/antd.css'
+import './permission'
+import './utils/iconfont'
+import './utils/layoutIcon'
+import './utils/directive'
+import { setWebSiteConfig } from './utils/tools'
 
 Vue.config.productionTip = false
-
-Vue.use(VueWechatTitle);
-
-Vue.prototype.$Utils = Util;
-Vue.prototype.$ajax = http;
+Vue.prototype.$setWebSite = setWebSiteConfig
 
 new Vue({
+  store,
   router,
-  i18n,
   render: h => h(App)
 }).$mount('#app')

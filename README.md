@@ -1,6 +1,6 @@
-# vue-cli-public-h5
+# vue-cli-public-work
 
-##### vue-cli-public-h5 自动生成H5项目固定模板。 请保证您的vue-cli版本 包含或者在3.0.0以上
+##### vue-cli-public-work 工作台UI框架
 
 #### 🚀 安装
 ```bash

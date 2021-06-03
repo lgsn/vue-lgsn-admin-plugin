@@ -1,8 +1,8 @@
 {
-  "name": "vue-cli-plugin-h5",
-  "version": "0.0.7",
+  "name": "vue-cli-plugin-work",
+  "version": "0.0.1",
   "main": "index.js",
-  "author": "kaiguan",
+  "author": "Guan LinTao",
   "license": "MIT License",
   "private": false
 }
