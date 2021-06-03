@@ -8,13 +8,13 @@
 </template>
 
 <script>
-  export default {
-    name: 'TestPage'
-  }
+export default {
+  name: 'TestPage'
+}
 </script>
 
 <style lang="scss" scoped>
-  .test-page{
-    padding: 24px;
-  }
+.test-page{
+  padding: 24px;
+}
 </style>
