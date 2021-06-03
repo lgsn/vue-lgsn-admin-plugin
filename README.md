@@ -1,6 +1,6 @@
-# vue-cli-public-work
+# vue-cli-plugin-work
 
-##### vue-cli-public-work 工作台UI框架
+##### vue-cli-plugin-work 工作台UI框架
 
 #### 🚀 安装
 ```bash

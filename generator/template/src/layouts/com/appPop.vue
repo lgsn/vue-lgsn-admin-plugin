@@ -27,7 +27,7 @@
 
 <script>
 import { Popover } from 'ant-design-vue'
-import { appAll } from '../../api/public'
+// import { appAll } from '../../api/public'
 import { mapGetters } from 'vuex'
 import { loginJump } from '@/api/public'
 export default {
@@ -45,9 +45,12 @@ export default {
     ...mapGetters(['baseAppInfo'])
   },
   created() {
-    appAll().then(res => {
-      this.appList = res.data
-    })
+    /**
+     * TODO 应用列表
+     */
+    // appAll().then(res => {
+    //   this.appList = res.data
+    // })
   },
   methods: {
     openView(item) {
