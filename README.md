@@ -4,12 +4,12 @@
 
 #### 🚀 安装
 ```bash
-$ npm i --save-dev vue-cli-plugin-h5
+$ npm i --save-dev vue-cli-plugin-work
 ```
 
 #### 🚀 使用
 ```bash
-$ vue invoke vue-cli-plugin-h5
+$ vue invoke vue-cli-plugin-work
 ```
 
 #### 注意
