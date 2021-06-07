@@ -5,13 +5,5 @@ module.exports = {
         prependData: `@import "@/styles/index.scss";`
       }
     }
-  },
-  devServer: {
-    proxy: {
-      '/api': {
-        target: 'http://xxxxx.xxxxx.com/',
-        changeOrigin: true
-      }
-    }
   }
 }
