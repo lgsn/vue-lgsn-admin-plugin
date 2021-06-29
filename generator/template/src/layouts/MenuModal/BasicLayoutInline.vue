@@ -39,7 +39,7 @@
 
           <!--面包屑-->
           <Breadcrumb class="menu-breadcrumb">
-            <BreadcrumbItem class="menu-breadcrumb-item">天机平台</BreadcrumbItem>
+            <BreadcrumbItem class="menu-breadcrumb-item">开关的百万小店</BreadcrumbItem>
             <BreadcrumbItem v-for="(item, index) in breadcrumbList" :key="index" class="menu-breadcrumb-item">{{ item.meta.name }}</BreadcrumbItem>
           </Breadcrumb>
 
