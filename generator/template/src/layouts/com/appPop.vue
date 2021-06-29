@@ -45,9 +45,6 @@ export default {
     ...mapGetters(['baseAppInfo'])
   },
   created() {
-    /**
-     * TODO 应用列表
-     */
     // appAll().then(res => {
     //   this.appList = res.data
     // })
