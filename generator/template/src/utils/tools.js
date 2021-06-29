@@ -10,14 +10,6 @@ const RouteView = {
   render: (h) => h('router-view')
 }
 
-// 脱敏手机号
-export function desensitizationPhone(phone) {
-  if (phone && phone.length === 11) {
-    return phone.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2')
-  }
-  return phone
-}
-
 // 菜单数据格式转换为 路由数据格式
 export function routerComponents(asyncRouterMap, routeRights, parentId) {
   const routeMap = routeRights || new Map()
@@ -43,54 +35,6 @@ export function routerComponents(asyncRouterMap, routeRights, parentId) {
     }
     return item
   }).filter(v => v.path && v.name)
-}
-
-// 处理时间格式 返回给后端
-export const formatRequestTime = (data, timeKey) => {
-  timeKey.forEach(v => {
-    if (!data[v]) return
-    data[v] = moment(data[v]).format('YYYY/MM/DD HH:mm:ss')
-  })
-  return data
-}
-
-// 保留两位小数 不四舍五入
-export const formatDecimal = (num, decimal = 2) => {
-  if (!num) return '0.00'
-  if (typeof num === 'number') {
-    num = num.toString()
-  }
-  const index = num.indexOf('.')
-  if (index !== -1) {
-    num = num.substring(0, decimal + index + 1)
-  } else {
-    num = num.substring(0)
-  }
-  const numSplice = num.split('.')
-  if (numSplice.length === 1) {
-    num = `${num}.00`
-  } else if (num.length === 2 && num[1].length === 1) {
-    num = `${num}0`
-  }
-  return num
-}
-
-// 防抖函数
-export const debounce = (fn, delay = 1000) => {
-  let timer
-  return function() {
-    const _that = this
-    if (timer) {
-      clearTimeout(timer)
-      timer = null
-    }
-    // eslint-disable-next-line no-undef
-    const _arguments = arguments
-    timer = setTimeout(() => {
-      timer = null
-      fn.apply(_that, _arguments)
-    }, delay)
-  }
 }
 
 // 转换key
