@@ -4,7 +4,6 @@
  * @date 3:53 下午
  * 常用工具
  */
-import moment from 'moment'
 const RouteView = {
   name: 'RouteView',
   render: (h) => h('router-view')
