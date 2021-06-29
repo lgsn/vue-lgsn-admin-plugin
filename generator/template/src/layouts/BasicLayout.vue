@@ -1,16 +1,24 @@
 <!--应用类型 公用布局-->
 <template>
 
-  <HorizontalMenu />
+  <BasicLayoutInline />
 
 </template>
 
 <script>
-import HorizontalMenu from './MenuModal/HorizontalMenu'
+/**
+ * 左侧菜单模式
+ */
+import BasicLayoutInline from './MenuModal/BasicLayoutInline'
+/**
+ * 顶部固定模式
+ */
+// import HorizontalMenu from './MenuModal/HorizontalMenu'
 export default {
   name: 'BasicLayout',
   components: {
-    HorizontalMenu
+    // BasicLayoutInline,
+    BasicLayoutInline
   }
 }
 </script>
