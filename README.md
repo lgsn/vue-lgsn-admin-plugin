@@ -15,4 +15,5 @@ $ vue invoke vue-cli-plugin-work
 #### 注意
 - `您需要手动前往vue.config.js 配置项目代理地址。` 
 - `EsLint 规范采用推荐规则`[规则](http://eslint.cn/docs/rules/)
+- `联系作者 gltwork@163.com`
 
