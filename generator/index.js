@@ -29,12 +29,12 @@ module.exports = (api, options) => {
       "@vue/cli-plugin-babel": "^4.5.0",
       "@vue/cli-plugin-eslint": "^4.5.0",
       "@vue/cli-service": "^4.5.0",
-      "babel-eslint": "~7.2.3",
+      "babel-eslint": "7.2.3",
       "crypto-js": "^4.0.0",
       "eslint": "^6.7.2",
       "eslint-plugin-vue": "^6.2.2",
-      "sass": "^1.32.8",
-      "sass-loader": "^8.0.0",
+      "sass": "1.32.8",
+      "sass-loader": "8.0.0",
       "vue-template-compiler": "^2.6.11"
     }
   })
