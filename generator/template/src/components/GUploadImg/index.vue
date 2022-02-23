@@ -58,7 +58,6 @@
 
 <script>
 import { Avatar, Upload } from 'ant-design-vue'
-import { uploadFileSrc } from '@/api/public'
 export default {
   name: 'GUploadImg',
   components: {
@@ -119,7 +118,7 @@ export default {
   },
   data() {
     return {
-      uploadFileSrc,
+      uploadFileSrc: 'TODO: 上传文件地址',
       uploadLoad: false
     }
   },

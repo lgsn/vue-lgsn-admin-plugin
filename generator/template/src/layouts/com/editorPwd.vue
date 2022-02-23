@@ -55,7 +55,6 @@
 
 <script>
 import { Modal } from 'ant-design-vue'
-import { updatePwd, logout } from '@/api/public'
 export default {
   name: 'EditorPwd',
   components: {
@@ -94,11 +93,8 @@ export default {
       this.$refs.editorPwd.validate(valid => {
         if (valid) {
           this.confirmLoading = true
-          updatePwd(this.pwdConfig).then(() => {
-            this.confirmLoading = false
-            this.$message.success('密码修改成功, 请重新登录')
-            logout()
-          }).catch(() => (this.confirmLoading = false))
+          this.confirmLoading = false
+          this.$message.success('密码修改成功, 请重新登录')
         }
       })
     },

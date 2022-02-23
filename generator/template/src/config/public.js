@@ -5,11 +5,11 @@
  * 公用全局配置
  */
 
-// 账号设置
-export const accountSetting = 'http://www.meichenit.com/home'
+/**
+* 不要删除此路由
+* 所有动态路由都注册这这个地址下
+**/
+export const dynamicRouting = '/home'
 
-// 当前路由默认页
-export const defaultRouterPath = '/modelCenter'
-
-// 当前应用标识
-export const APPCODE = 'appName'
+// 系统名称
+export const APP_NAME = '开关的百万梦想'

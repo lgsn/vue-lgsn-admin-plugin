@@ -82,7 +82,7 @@ export function arrayTransferMap(data, key = 'key', result = new Map()) {
   return info
 }
 
-// 设置网站信息
+// 设置网页标题信息
 export function setWebSiteConfig(info) {
   document.title = info.title
   let iconDome = document.getElementById('webIcon')

@@ -4,12 +4,17 @@
  * @date 8:13 下午
  * 基础路由
  */
-import { defaultRouterPath } from '@/config/public'
+import { dynamicRouting } from '@/config/public'
 export default [
   {
     path: '/',
     name: '/',
-    redirect: defaultRouterPath
+    redirect: dynamicRouting
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/views/login')
   },
   {
     path: '/error',

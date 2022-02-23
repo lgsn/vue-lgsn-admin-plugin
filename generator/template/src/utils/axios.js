@@ -1,7 +1,6 @@
 import axios from 'axios'
 import { message } from 'ant-design-vue'
 import Router from '../router'
-import { logout } from '@/api/public'
 
 // 公用前缀
 const baseURL = '/api'
@@ -17,22 +16,6 @@ function checkResponse(response) {
   // 校验HTTP 状态
   if (response && ([200, 304, 400].includes(Number(response.status)))) {
     // 校验业务CODE
-    const { code, msg } = response.data
-
-    if (code !== '0000') {
-      // 重新登录
-      if (code === '102') {
-        logout()
-      } else {
-        // 防止后端异常报错
-        if (/[\u4e00-\u9fa5]/.test(msg) && msg.length < 100) {
-          message.error(msg)
-        } else {
-          message.error('服务器开小差啦，请稍后重试。')
-        }
-      }
-      return Promise.reject(response.data)
-    }
     return response.data
   }
   message.error('服务睡着了啦，快去叫醒它吧。')

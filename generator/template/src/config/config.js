@@ -1,27 +1,24 @@
 // 模拟数据
 const configInfo = {
-  "menus": [
+  // 全部菜单
+  'menus': [
     {
-      "id":"WXsVHNdZ23","name":"测试页面","link":"/testPage","component":"views/testPage/index","icon":"icon-qiyexinxi","children":[]
+      'id': 'WXsVHNdZ23', 'name': '测试页面', 'link': '/testPage', 'component': 'views/testPage/index', 'icon': 'icon-qiyexinxi', 'children': []
     }
   ],
-  "authMenus":[
+  // 当前用户已授权的菜单
+  'authMenus': [
     {
-      "id":"WXsVHNdZ23","name":"测试页面","link":"/testPage","component":"views/testPage/index","icon":"icon-qiyexinxi","children":[]
+      'id': 'WXsVHNdZ23', 'name': '测试页面', 'link': '/testPage', 'component': 'views/testPage/index', 'icon': 'icon-qiyexinxi', 'children': []
     }
   ],
-  "resources":[],
-  "rescCodes":[],
-  "app":{
-    "appId":"sRADx4WyPe",
-    "appName":"控制中心",
-    "appCode":"hera",
-    "iconUrl":'http://file.ibabystory.cn/basic/rhinoIco.ico',
-    "linkUrl":"http://www.meichenit.com/hera",
-    "appDesc":"工作台系统配置，权限控制",
-    "coverUrl":"https://file.meayan.com/gaea/de0e8bf038f9d66309041fb39d638b2a.png",
-    "tabIcon":"https://file.meayan.com/gaea/de0e8bf038f9d66309041fb39d638b2a.png",
-    "tabTitle":"控制中心","isCommon":true,"state":"10","stateDesc":"可用","validStartTime":null,"validEndTime":null
+  // 主页面左上角展示内容
+  'app': {
+    'appName': '开关的百万梦想', // 左上角名称
+    'iconUrl': '', // 左上角图标
+    'linkUrl': '', // 点击左上角跳转地址
+    'tabIcon': '', // 网页标题栏图标
+    'tabTitle': '控制中心' // 网页标题
   }
 }
 

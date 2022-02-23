@@ -6,7 +6,8 @@
 
       <div slot="content" class="app-pop-content">
         <div class="app-center" @click="openView({linkUrl: baseAppInfo.link})">
-          <img class="app-icon" :src="baseAppInfo.appIcon" alt="">
+          <img v-if="baseAppInfo.appIcon" class="app-icon" :src="baseAppInfo.appIcon" alt="">
+          <img v-else class="app-icon" src="../../assets/img/error-404.png" alt="">
           <span class="app-logo">{{ baseAppInfo.appName }}</span>
         </div>
         <div class="content-overflow">
@@ -27,9 +28,7 @@
 
 <script>
 import { Popover } from 'ant-design-vue'
-// import { appAll } from '../../api/public'
 import { mapGetters } from 'vuex'
-import { loginJump } from '@/api/public'
 export default {
   name: 'AppPop',
   components: {
@@ -44,15 +43,10 @@ export default {
   computed: {
     ...mapGetters(['baseAppInfo'])
   },
-  created() {
-    // appAll().then(res => {
-    //   this.appList = res.data
-    // })
-  },
   methods: {
     openView(item) {
       if (!item.linkUrl) return
-      loginJump(item.linkUrl)
+      this.$router.push({ path: item.linkUrl })
     }
   }
 }
@@ -94,6 +88,7 @@ export default {
     img{
       width: 42px;
       height: 42px;
+      object-fit: scale-down;
     }
     .icon{
       font-size: 22px;

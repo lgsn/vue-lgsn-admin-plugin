@@ -4,15 +4,11 @@
 
     <Popover v-model="visible" trigger="click" placement="bottomLeft">
       <div slot="content" class="avatar-popover-content">
-        <div class="avatar-com-header" @click="accountSetting">
+        <div class="avatar-com-header">
           <GUploadImg v-model="info.headImg" :read-only="true" :border="true" class="avatar-com-header-img" :size="size" :avatar-text="info.userName" @click="visible = true" />
           <span class="user-name">{{ info.userName }}</span>
         </div>
         <ul>
-          <li @click="accountSetting">
-            <GIcon icon="icon-shezhi"></GIcon>
-            <span>账号设置</span>
-          </li>
           <li @click="() => { isEditorPwd = true; close() }">
             <GIcon icon="icon-bianji"></GIcon>
             <span>修改密码</span>
@@ -42,8 +38,6 @@
 import { Popover } from 'ant-design-vue'
 import GUploadImg from '@/components/GUploadImg'
 import editorPwd from './editorPwd'
-import { logout } from '@/api/public'
-import { accountSetting } from '@/config/public'
 export default {
   name: 'AvatarCom',
   components: {
@@ -70,13 +64,6 @@ export default {
   methods: {
     // 退出登录
     logOut() {
-      logout()
-    },
-
-    // 账号设置
-    accountSetting() {
-      this.close()
-      window.location.href = accountSetting
     },
 
     close() {

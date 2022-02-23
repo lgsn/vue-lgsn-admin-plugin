@@ -39,7 +39,7 @@
 
           <!--面包屑-->
           <Breadcrumb class="menu-breadcrumb">
-            <BreadcrumbItem class="menu-breadcrumb-item">开关的百万小店</BreadcrumbItem>
+            <BreadcrumbItem class="menu-breadcrumb-item">{{ APP_NAME }}</BreadcrumbItem>
             <BreadcrumbItem v-for="(item, index) in breadcrumbList" :key="index" class="menu-breadcrumb-item">{{ item.meta.name }}</BreadcrumbItem>
           </Breadcrumb>
 
@@ -67,6 +67,7 @@ import NavTags from '../com/navTags'
 import appCom from '../com/appCom'
 import appPop from '../com/appPop'
 import avatarCom from '../com/avatarCom'
+import { APP_NAME } from '@/config/public'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -86,6 +87,7 @@ export default {
   },
   data() {
     return {
+      APP_NAME,
       collapsed: false,
       collapsedFooter: false,
       breadcrumbList: [],

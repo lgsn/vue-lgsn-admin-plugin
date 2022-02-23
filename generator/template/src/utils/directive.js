@@ -44,6 +44,7 @@ Vue.directive('copy', {
 
 /**
  * 权限按钮
+ * <div v-rights='1995'>编辑</>
  */
 Vue.directive('rights', {
   inserted: function(el, binding, vnode) {
