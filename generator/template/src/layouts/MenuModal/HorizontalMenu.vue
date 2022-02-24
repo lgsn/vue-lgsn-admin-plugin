@@ -49,7 +49,7 @@ export default {
   },
   created() {
     const defaultRouterView = this.userMenu[0]
-    this.defaultRouter = defaultRouterView.children.length ? defaultRouterView.children[0].link : defaultRouterView.link
+    this.defaultRouter = defaultRouterView.children && defaultRouterView.children.length ? defaultRouterView.children[0].link : defaultRouterView.link
   }
 }
 </script>

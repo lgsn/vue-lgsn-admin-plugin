@@ -1,7 +1,6 @@
 import { arrayTransferMap, mergeArray } from '@/utils/tools'
 import { arrayToMap } from '@/utils/tools'
 import configInfo from '../../config/config'
-import { MockBaseAppInfo, MockResponse } from '../../config/mock'
 
 const state = {
   userInfo: {},
@@ -46,8 +45,43 @@ const actions = {
        * 这里是mock数据
        * 正常情况下你应该使用API来获取当前用户信息
        */
-      const response = MockResponse
-      const baseAppInfo = MockBaseAppInfo
+      // 当前登录用户信息
+      const response = {
+        'id': '1995',
+        'userName': '开关'
+      }
+
+      /**
+       * 顶部快速切换应用 主应用信息
+       * 你也可以不使用此数据格式 修改以下方法
+       * commit('setBaseAppInfo', arrayToMap(baseAppInfo.data))
+       */
+      const baseAppInfo = [
+        {
+          'configCode': 'appIcon',
+          'configVal': ''
+        },
+        {
+          'configCode': 'appName',
+          'configVal': '开关的百万梦想'
+        },
+        {
+          'configCode': 'banner',
+          'configVal': 'http://kaifa.baidu.com'
+        },
+        {
+          'configCode': 'link',
+          'configVal': 'http://kaifa.baidu.com'
+        },
+        {
+          'configCode': 'tabIcon',
+          'configVal': 'http://kaifa.baidu.com'
+        },
+        {
+          'configCode': 'tabTitle',
+          'configVal': '开关的百万梦想'
+        }
+      ]
       const isAuth = !response.data.phoneAuth || response.data.simplePwd
       commit('setBaseAppInfo', arrayToMap(baseAppInfo.data))
       commit('userInfo', {
