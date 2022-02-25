@@ -2,7 +2,6 @@
   <!--左侧 logo 菜单-->
   <div class="logo" @click="() => { $router.push(defaultRouter) }">
     <img v-if="appInfo.iconUrl" class="logo-img" alt="返回应用中心" :src="appInfo.iconUrl">
-    <img v-else class="logo-img" alt="返回应用中心" src="../../assets/img/error-404.png">
     <p v-if="!collapsed" class="logo-name">{{ appInfo.appName }}</p>
   </div>
 </template>

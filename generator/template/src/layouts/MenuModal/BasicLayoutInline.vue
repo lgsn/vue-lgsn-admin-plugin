@@ -6,7 +6,7 @@
     <LayoutSider v-model="collapsed" :trigger="null" collapsible class="basic-layout-sider">
 
       <!--左侧应用标识-->
-      <appCom :default-router="defaultRouter" :collapsed="collapsed" />
+      <appCom :default-router="defaultPathUrl" :collapsed="collapsed" />
 
       <!--菜单-->
       <BasicMenu v-model="collapsed" />
@@ -29,7 +29,6 @@
 
         <!--右侧操作栏-->
         <div class="layout-head-right">
-          <appPop />
           <avatarCom :size="26" :info="userInfo" />
         </div>
 
@@ -65,7 +64,6 @@ import { Layout, Breadcrumb } from 'ant-design-vue'
 import BasicMenu from './BasicMenu'
 import NavTags from '../com/navTags'
 import appCom from '../com/appCom'
-import appPop from '../com/appPop'
 import avatarCom from '../com/avatarCom'
 import { APP_NAME } from '@/config/public'
 import { mapGetters } from 'vuex'
@@ -79,7 +77,6 @@ export default {
     LayoutHeader: Layout.Header,
     LayoutContent: Layout.Content,
     avatarCom,
-    appPop,
     appCom,
     Breadcrumb,
     BreadcrumbItem: Breadcrumb.Item,
@@ -93,11 +90,11 @@ export default {
       breadcrumbList: [],
       tagViews: [],
       currentTag: '',
-      defaultRouter: ''
+      defaultPathUrl: ''
     }
   },
   computed: {
-    ...mapGetters(['userInfo', 'userMenu'])
+    ...mapGetters(['userInfo', 'userMenu', 'defaultPath'])
   },
   watch: {
     $route(route) {
@@ -109,15 +106,13 @@ export default {
     }
   },
   created() {
-    const defaultRouterView = this.userMenu[0]
-    this.defaultRouter = defaultRouterView.children && defaultRouterView.children.length ? defaultRouterView.children[0].link : defaultRouterView.link
     this.initBreadcrumb()
     this.initTag()
   },
   methods: {
     // 初始化面包屑导航
     initBreadcrumb() {
-      this.defaultRouter = this.$route.matched[0].path
+      this.defaultPathUrl = this.$route.matched[0].path
       this.breadcrumbList = this.$route.matched.filter(v => v.meta && v.meta.name)
     },
     // 初始化历史标签
@@ -213,14 +208,16 @@ export default {
         display: flex;
         background: #fff;
         padding: 0;
+        user-select: none;
+        outline: none;
       }
       .menu-breadcrumb{
         line-height: 48px;
         .menu-breadcrumb-item{
-          color: #434343;
+          color: #8c8c8c;
         }
         .menu-breadcrumb-item:last-child{
-          color: #8c8c8c;
+          color: #434343;
         }
       }
       .layout-head-right{

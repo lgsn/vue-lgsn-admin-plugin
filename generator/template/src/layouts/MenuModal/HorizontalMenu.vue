@@ -10,8 +10,6 @@
 
       <!--右侧操作栏-->
       <div class="horizontal-right">
-        <!--快捷应用入口-->
-        <appPop />
         <!--用户信息-->
         <avatarCom :size="26" :info="userInfo" />
       </div>
@@ -27,7 +25,6 @@
 
 <script>
 import appCom from '../com/appCom'
-import appPop from '../com/appPop'
 import avatarCom from '../com/avatarCom'
 import BasicMenu from './BasicMenu'
 import { mapGetters } from 'vuex'
@@ -35,7 +32,6 @@ export default {
   name: 'HorizontalMenu',
   components: {
     appCom,
-    appPop,
     BasicMenu,
     avatarCom
   },
@@ -45,11 +41,10 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['userMenu', 'userInfo'])
+    ...mapGetters(['userMenu', 'userInfo', 'defaultPath'])
   },
   created() {
-    const defaultRouterView = this.userMenu[0]
-    this.defaultRouter = defaultRouterView.children && defaultRouterView.children.length ? defaultRouterView.children[0].link : defaultRouterView.link
+    this.defaultRouter = this.defaultPath
   }
 }
 </script>

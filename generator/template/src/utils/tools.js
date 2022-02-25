@@ -14,11 +14,11 @@ export function routerComponents(asyncRouterMap, routeRights, parentId) {
   const routeMap = routeRights || new Map()
   return asyncRouterMap.filter(v => v.component).map(route => {
     const item = {}
-    routeMap.set(route.link, { rights: route.rights })
+    routeMap.set(route.path, { rights: route.rights })
     if (route.component && route.rights) {
       const component = route.component
-      item.path = `${route.link}`
-      item.name = route.link
+      item.path = `${route.path}`
+      item.name = route.path
       if (route.component === 'layout') {
         item.component = RouteView
       } else {
@@ -51,7 +51,7 @@ export function mergeArray(data, newData) {
   data.forEach(v => {
     for (let i = 0; i < newData.length; i++) {
       if (v.id === newData[i].id) {
-        if (newData[i].children.length) {
+        if (newData[i].children && newData[i].children.length) {
           mergeArray(data, newData[i].children)
         }
         v.rights = true
@@ -80,6 +80,21 @@ export function arrayTransferMap(data, key = 'key', result = new Map()) {
     })
   }
   return info
+}
+
+// 递归处理Array 返回指定条件的数据
+export function arrayFilter(oldData) {
+  if (!oldData || !oldData.length) return []
+  const filterData = []
+  oldData.forEach(v => {
+    if (!v.hideMenu) {
+      if (v.children && v.children.length) {
+        v.children = arrayFilter(v.children)
+      }
+      filterData.push(v)
+    }
+  })
+  return filterData
 }
 
 // 设置网页标题信息

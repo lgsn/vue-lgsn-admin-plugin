@@ -53,9 +53,7 @@ router.beforeEach(async(to, from, next) => {
            * 前往系统默认页
            * 跳转至系统菜单中当一条菜单
            */
-          const defaultRouterView = store.getters.userMenu[0]
-          const routerUrl = defaultRouterView.children && defaultRouterView.children.length ? defaultRouterView.children[0].link : defaultRouterView.link
-          next(routerUrl)
+          next(store.getters.defaultPath)
         } else {
           next()
         }

@@ -16,7 +16,7 @@
         <template v-for="menu in userMenu">
 
           <!--一级菜单-->
-          <a-menu-item v-if="!menu.children || !menu.children.length" :key="menu.link">
+          <a-menu-item v-if="!menu.children || !menu.children.length" :key="menu.path">
             <GIcon class="menu-icon anticon" :icon="menu.icon" />
             <span>{{ menu.name }}</span>
           </a-menu-item>
@@ -29,7 +29,7 @@
               <span>{{ menu.name }}</span>
             </template>
 
-            <a-menu-item v-for="menuChildren in menu.children" :key="menuChildren.link">
+            <a-menu-item v-for="menuChildren in menu.children" :key="menuChildren.path">
               {{ menuChildren.name }}
             </a-menu-item>
 
@@ -53,7 +53,7 @@
         <template v-for="menu in userMenu">
 
           <!--一级菜单-->
-          <a-menu-item v-if="!menu.children || !menu.children.length" :key="menu.link">
+          <a-menu-item v-if="!menu.children || !menu.children.length" :key="menu.path">
             <GIcon v-if="menu.icon" class="menu-icon anticon" :icon="menu.icon" />
             <span>{{ menu.name }}</span>
           </a-menu-item>
@@ -66,7 +66,7 @@
               <span>{{ menu.name }}</span>
             </template>
 
-            <a-menu-item v-for="menuChildren in menu.children" :key="menuChildren.link">
+            <a-menu-item v-for="menuChildren in menu.children" :key="menuChildren.path">
               {{ menuChildren.name }}
             </a-menu-item>
 

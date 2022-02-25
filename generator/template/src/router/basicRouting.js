@@ -3,6 +3,8 @@
  * @author Guan LinTao
  * @date 8:13 下午
  * 基础路由
+ * 这里路由会直接被 vue-router加载 不需要额外的操作
+ * 不需要权限管理
  */
 import { dynamicRouting } from '@/config/public'
 export default [

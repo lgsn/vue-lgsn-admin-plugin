@@ -1,4 +1,4 @@
-import { arrayTransferMap, mergeArray } from '@/utils/tools'
+import { arrayTransferMap, mergeArray, arrayFilter } from '@/utils/tools'
 import { arrayToMap } from '@/utils/tools'
 import configInfo from '../../config/config'
 
@@ -8,7 +8,8 @@ const state = {
   userRights: new Map(),
   roles: false,
   appInfo: {},
-  baseAppInfo: {}
+  baseAppInfo: {},
+  defaultPath: ''
 }
 
 const getters = {
@@ -21,6 +22,8 @@ const mutations = {
     state.userInfo = data
   },
   setUserMenu(state, data) {
+    const defaultPage = data && data.length ? data[0] : {}
+    state.defaultPath = defaultPage.children && defaultPage.children.length ? defaultPage.children[0].path : defaultPage.path
     state.userMenu = data
   },
   setRoles: (state, data) => {
@@ -106,7 +109,10 @@ const actions = {
         // 当前应用信息
         commit('setAppInfo', appInfo)
         // 已授权用户菜单
-        commit('setUserMenu', configInfo.authMenus)
+        // 过滤左侧菜单数据 剔除不需要展示的菜单
+        const filterAuthMenus = arrayFilter(JSON.parse(JSON.stringify(configInfo.menus)))
+        // 设置左侧菜单
+        commit('setUserMenu', filterAuthMenus)
         // 菜单权限标识
         commit('setRoles', true)
         // 用户操作权限
