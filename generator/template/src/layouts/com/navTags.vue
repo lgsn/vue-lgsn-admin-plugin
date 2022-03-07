@@ -13,7 +13,7 @@
         <div class="tab-background"><tabSvg /></div>
         <div class="tab-content">
           <div class="tab-content-name">{{ item.name }}</div>
-          <a-icon v-if="tags.length > 1" class="tab-close" type="close" @click.stop="delTag(index)" />
+          <i v-if="tags.length > 1" class="el-icon-close" type="close" @click.stop="delTag(index)" />
         </div>
       </div>
     </div>
@@ -133,10 +133,10 @@ export default {
           font-weight: 600;
           white-space: nowrap;
         }
-        .tab-close{
+        .el-icon-close{
           position: absolute;
           right: 18px;
-          top: 8px;
+          top: 6px;
           padding: 4px;
           font-size: 10px;
           cursor: pointer;

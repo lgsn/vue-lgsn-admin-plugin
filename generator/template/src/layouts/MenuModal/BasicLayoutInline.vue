@@ -1,28 +1,28 @@
 <!--应用类型 公用布局-->
 <template>
-  <Layout class="basic-layout">
+  <div class="basic-layout">
 
     <!--左侧 logo 菜单-->
-    <LayoutSider v-model="collapsed" :trigger="null" collapsible class="basic-layout-sider">
+    <Aside :width="!collapsed ? '200px' : '60px'" class="basic-layout-sider">
 
-      <!--左侧应用标识-->
-      <appCom :default-router="defaultPathUrl" :collapsed="collapsed" />
+      <!--左侧 Logo 标题-->
+      <appMenuTitle :default-router="defaultPathUrl" :collapsed="collapsed" />
 
       <!--菜单-->
-      <BasicMenu v-model="collapsed" />
+      <BasicMenu :collapsed="collapsed" />
 
       <!--展开/缩小菜单栏-->
       <div v-if="collapsedFooter" class="basic-layout-sider-footer" @click="toggleCollapsed">
-        <a-icon :type="collapsed ? 'menu-unfold' : 'menu-fold'" />
+        <GIcon :icon="collapsed ? 'icon-caidanzhankai' : 'icon-caidanshouqi'" />
       </div>
 
-    </LayoutSider>
+    </Aside>
 
     <!--右侧 导航 内容-->
-    <Layout>
+    <div class="basic-layout-right">
 
       <!--导航-->
-      <LayoutHeader class="layout-head">
+      <div class="layout-head">
 
         <!--菜单标签栏-->
         <NavTags :current-tag="currentTag" :tags="tagViews" @delTag="delTag" />
@@ -34,7 +34,7 @@
 
         <div class="layout-head-info">
           <!--展开/缩小菜单栏-->
-          <a-icon class="menu-collapsed" :type="collapsed ? 'menu-unfold' : 'menu-fold'" @click="toggleCollapsed" />
+          <GIcon @click.native="toggleCollapsed" class="menu-icon-collapsed" :icon="collapsed ? 'icon-caidanzhankai' : 'icon-caidanshouqi'" />
 
           <!--面包屑-->
           <Breadcrumb class="menu-breadcrumb">
@@ -44,119 +44,114 @@
 
         </div>
 
-      </LayoutHeader>
+      </div>
 
       <!--内容-->
-      <LayoutContent class="layout-content">
+      <div class="layout-content">
 
         <router-view />
 
-      </LayoutContent>
+      </div>
 
-    </Layout>
+    </div>
 
-  </Layout>
+  </div>
 
 </template>
 
 <script>
-import { Layout, Breadcrumb } from 'ant-design-vue'
-import BasicMenu from './BasicMenu'
-import NavTags from '../com/navTags'
-import appCom from '../com/appCom'
-import avatarCom from '../com/avatarCom'
-import { APP_NAME } from '@/config/public'
-import { mapGetters } from 'vuex'
+  import { Aside, Breadcrumb, BreadcrumbItem } from 'element-ui'
+  import BasicMenu from './BasicMenu'
+  import NavTags from '../com/navTags'
+  import appMenuTitle from '../com/appMenuTitle'
+  import avatarCom from '../com/avatarCom'
+  import { APP_NAME } from '@/config/public'
+  import { mapGetters } from 'vuex'
 
-export default {
-  name: 'BasicLayoutInline',
-  components: {
-    BasicMenu: BasicMenu,
-    Layout: Layout,
-    LayoutSider: Layout.Sider,
-    LayoutHeader: Layout.Header,
-    LayoutContent: Layout.Content,
-    avatarCom,
-    appCom,
-    Breadcrumb,
-    BreadcrumbItem: Breadcrumb.Item,
-    NavTags
-  },
-  data() {
-    return {
-      APP_NAME,
-      collapsed: false,
-      collapsedFooter: false,
-      breadcrumbList: [],
-      tagViews: [],
-      currentTag: '',
-      defaultPathUrl: ''
-    }
-  },
-  computed: {
-    ...mapGetters(['userInfo', 'userMenu', 'defaultPath'])
-  },
-  watch: {
-    $route(route) {
-      this.initTag()
-      if (route.path.startsWith('/redirect/')) {
-        return
+  export default {
+    name: 'BasicLayoutInline',
+    components: {
+      Aside,
+      BasicMenu: BasicMenu,
+      avatarCom,
+      appMenuTitle,
+      Breadcrumb,
+      BreadcrumbItem,
+      NavTags
+    },
+    data() {
+      return {
+        APP_NAME,
+        collapsed: false,
+        collapsedFooter: false,
+        breadcrumbList: [],
+        tagViews: [],
+        currentTag: '',
+        defaultPathUrl: ''
       }
+    },
+    computed: {
+      ...mapGetters(['userInfo', 'userMenu', 'defaultPath'])
+    },
+    watch: {
+      $route(route) {
+        this.initTag()
+        if (route.path.startsWith('/redirect/')) {
+          return
+        }
+        this.initBreadcrumb()
+      }
+    },
+    created() {
       this.initBreadcrumb()
-    }
-  },
-  created() {
-    this.initBreadcrumb()
-    this.initTag()
-  },
-  methods: {
-    // 初始化面包屑导航
-    initBreadcrumb() {
-      this.defaultPathUrl = this.$route.matched[0].path
-      this.breadcrumbList = this.$route.matched.filter(v => v.meta && v.meta.name)
+      this.initTag()
     },
-    // 初始化历史标签
-    initTag() {
-      const allView = this.$route
-      if (!allView.meta || !allView.meta.name) return
-      if (this.tagViews.some(v => v.path === allView.path)) {
+    methods: {
+      // 初始化面包屑导航
+      initBreadcrumb() {
+        this.defaultPathUrl = this.$route.matched[0].path
+        this.breadcrumbList = this.$route.matched.filter(v => v.meta && v.meta.name)
+      },
+      // 初始化历史标签
+      initTag() {
+        const allView = this.$route
+        if (!allView.meta || !allView.meta.name) return
+        if (this.tagViews.some(v => v.path === allView.path)) {
+          this.currentTag = allView.meta.name
+          return
+        }
+        this.tagViews.push(
+          Object.assign({}, allView, {
+            name: allView.meta.name || 'no-name'
+          })
+        )
         this.currentTag = allView.meta.name
-        return
-      }
-      this.tagViews.push(
-        Object.assign({}, allView, {
-          name: allView.meta.name || 'no-name'
-        })
-      )
-      this.currentTag = allView.meta.name
-    },
-    // 展开/收缩菜单
-    toggleCollapsed() {
-      this.collapsed = !this.collapsed
-    },
-    // 删除标签视图
-    delTag(index) {
-      this.tagViews.splice(index, 1)
-      if (this.tagViews.length) {
-        this.$router.push(this.tagViews[this.tagViews.length - 1].path)
+      },
+      // 展开/收缩菜单
+      toggleCollapsed() {
+        this.collapsed = !this.collapsed
+      },
+      // 删除标签视图
+      delTag(index) {
+        this.tagViews.splice(index, 1)
+        if (this.tagViews.length) {
+          this.$router.push(this.tagViews[this.tagViews.length - 1].path)
+        }
       }
     }
   }
-}
 </script>
 
 <style lang="scss">
   .basic-layout{
     width: 100%;
     height: 100%;
+    display: flex;
     .basic-layout-sider{
       position: relative;
       z-index: 20;
       box-shadow: 10px 0 10px -10px #c7c7c7;
-      ::v-deep .ant-layout-sider-children{
-        display: flex;
-        flex-direction: column;
-      }
+      transition: all .3s;
       .basic-layout-sider-footer {
         height: 48px;
         line-height: 48px;
@@ -165,6 +160,13 @@ export default {
         padding: 0 16px;
         cursor: pointer;
       }
+    }
+    .basic-layout-right{
+      display: flex;
+      flex: auto;
+      flex-direction: column;
+      min-height: 0;
+      background: #f0f2f5;
     }
     .logo{
       height: 32px;
@@ -178,11 +180,10 @@ export default {
         margin: 0 auto;
       }
       .logo-name{
-        background: #fafafa;
         display: inline-block;
         font-weight: 600;
         color: #37414b;
-        font-size: 18px;
+        font-size: 17px;
         margin: 0 0 0 12px;
         width: 100%;
         text-overflow: ellipsis;
@@ -194,8 +195,9 @@ export default {
       width: 100%;
       color: #fff;
     }
-    .ant-layout-header{
-      height: auto;
+    .layout-content{
+      flex: auto;
+      min-height: auto;
     }
     .layout-head{
       padding: 0;
@@ -213,11 +215,13 @@ export default {
       }
       .menu-breadcrumb{
         line-height: 48px;
-        .menu-breadcrumb-item{
+        .el-breadcrumb__inner{
           color: #8c8c8c;
         }
         .menu-breadcrumb-item:last-child{
-          color: #434343;
+          .el-breadcrumb__inner{
+            color: #434343;
+          }
         }
       }
       .layout-head-right{
@@ -229,13 +233,16 @@ export default {
         height: 40px;
       }
     }
-    .menu-collapsed{
-      padding: 0 16px;
-      font-size: 20px;
-      color: var(--titleColor);
+    .menu-icon-collapsed{
+      display: inline-block;
       font-weight: bold;
+      font-size: 20px;
       cursor: pointer;
-      line-height: 50px;
+      height: 48px;
+      line-height: 48px;
+      color: #475669;
+      padding: 0 16px;
+      box-sizing: content-box;
       &:hover{
         background-image: -webkit-gradient(linear,left top,right top,from(#ddd),to(transparent))
       }

@@ -15,7 +15,6 @@ module.exports = (api, options) => {
   // 添加配置文件
   api.extendPackage({
     dependencies: {
-      "ant-design-vue": "^1.7.3",
       "axios": "^0.21.1",
       "core-js": "^3.6.5",
       "crypto-js": "^4.0.0",

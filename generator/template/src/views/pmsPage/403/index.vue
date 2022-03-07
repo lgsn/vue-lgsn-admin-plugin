@@ -55,9 +55,6 @@ export default {
       .error-desc-btn{
         display: flex;
         align-items: center;
-        .ant-btn{
-          margin-right: 24px;
-        }
       }
     }
   }

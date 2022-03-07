@@ -3,7 +3,7 @@
 
     <div class="horizontal-head">
       <!--左上角 当前应用信息-->
-      <appCom :default-router="defaultRouter" />
+      <appMenuTitle :default-router="defaultRouter" />
 
       <!--菜单-->
       <BasicMenu mode-type="horizontal" :collapsed="false" />
@@ -24,14 +24,14 @@
 </template>
 
 <script>
-import appCom from '../com/appCom'
+import appMenuTitle from '../com/appMenuTitle'
 import avatarCom from '../com/avatarCom'
 import BasicMenu from './BasicMenu'
 import { mapGetters } from 'vuex'
 export default {
   name: 'HorizontalMenu',
   components: {
-    appCom,
+    appMenuTitle,
     BasicMenu,
     avatarCom
   },
@@ -74,11 +74,10 @@ export default {
         height: 28px;
       }
       .logo-name{
-        background: #fafafa;
         display: inline-block;
         font-weight: 600;
         color: #37414b;
-        font-size: 18px;
+        font-size: 17px;
         margin: 0 0 0 12px;
         width: 100%;
         text-overflow: ellipsis;

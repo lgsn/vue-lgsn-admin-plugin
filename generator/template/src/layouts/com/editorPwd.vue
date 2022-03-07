@@ -1,64 +1,64 @@
 <!--修改密码-->
 <template>
-  <Modal
-    :visible="value"
+  <Dialog
     title="修改密码"
-    :confirm-loading="confirmLoading"
-    ok-text="确认"
-    cancel-text="取消"
-    destroy-on-close
-    @ok="handleOk"
-    @cancel="handleCancel"
+    width="500px"
+    :visible.sync="value"
+    append-to-body
+    center
+    @closed="handleCancel"
   >
-    <a-form-model ref="editorPwd" class="editor-pwd-form" :label-col="{span: 4}" :wrapper-col="{span: 14}" :model="pwdConfig" :rules="rules">
+    <el-form ref="editorPwd" class="editor-pwd-form" :model="pwdConfig" :rules="rules" label-width="auto" label-suffix=":">
 
-      <a-form-model-item label="旧密码" prop="oldPwd">
+      <el-form-item label="旧密码" prop="oldPwd">
 
-        <a-input
+        <el-input
           v-model="pwdConfig.oldPwd"
-          size="large"
           class="login-input"
           placeholder="旧密码"
           type="password"
         />
 
-      </a-form-model-item>
+      </el-form-item>
 
-      <a-form-model-item label="新密码" prop="newPwd">
+      <el-form-item label="新密码" prop="newPwd">
 
-        <a-input
+        <el-input
           v-model="pwdConfig.newPwd"
-          size="large"
           class="login-input"
           placeholder="新密码"
           type="password"
         />
 
-      </a-form-model-item>
+      </el-form-item>
 
-      <a-form-model-item label="确认密码" prop="newPwd">
+      <el-form-item label="确认密码" prop="newPwd">
 
-        <a-input
+        <el-input
           v-model="pwdConfig.confirmPwd"
-          size="large"
           class="login-input"
           placeholder="再次输入新密码"
           type="password"
         />
 
-      </a-form-model-item>
+      </el-form-item>
 
-    </a-form-model>
+    </el-form>
 
-  </Modal>
+    <span slot="footer">
+      <el-button @click="handleCancel">取 消</el-button>
+      <el-button type="primary" v-loading="confirmLoading" @click="handleOk">保 存</el-button>
+    </span>
+
+  </Dialog>
 </template>
 
 <script>
-import { Modal } from 'ant-design-vue'
+import { Dialog } from 'element-ui'
 export default {
   name: 'EditorPwd',
   components: {
-    Modal
+    Dialog
   },
   props: {
     value: {
@@ -112,15 +112,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.editor-pwd-form{
-  ::v-deep .ant-form-item-required {
-    color: var(--titleColor);
-    font-weight: 600;
-  }
-  input{
-    font-size: 14px;
-  }
-}
-</style>

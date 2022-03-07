@@ -1,5 +1,5 @@
 <template>
-  <!--左侧 logo 菜单-->
+  <!--左侧顶部 logo 标题-->
   <div class="logo" @click="() => { $router.push(defaultRouter) }">
     <img v-if="appInfo.iconUrl" class="logo-img" alt="返回应用中心" :src="appInfo.iconUrl">
     <p v-if="!collapsed" class="logo-name">{{ appInfo.appName }}</p>
@@ -9,7 +9,7 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
-  name: 'AppCom',
+  name: 'appMenuTitle',
   props: {
     defaultRouter: {
       type: String,

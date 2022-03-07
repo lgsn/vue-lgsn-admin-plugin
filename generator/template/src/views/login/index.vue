@@ -3,13 +3,73 @@
   <div class="login">
 
     <div class="login-overflow">
+
       <div class="login-banner" @mousemove="moveBanner($event)" @mouseout="clearMoveBanner($event)">
         <img src="@/assets/img/login-icon-01.png" alt="" :style="{transform: loginIcon01}">
         <img src="@/assets/img/login-icon-03.png" alt="" :style="{transform: loginIcon03}">
       </div>
 
-      <!--登录相关-->
-      <components :is="componentName" v-model="componentName" :default-phone="defaultPhone" @change="changeLoginType" />
+      <div class="login-model">
+
+        <p class="global-title">{{ APP_NAME }}</p>
+
+        <el-form ref="loginForm" :model="loginForm" :rules="rules">
+
+          <!--手机号-->
+          <el-form-item prop="username">
+
+            <el-input
+                v-model="loginForm.username"
+                size="large"
+                class="login-input"
+                placeholder="请输入账号"
+                :maxlength="20"
+                @change="checkPhone"
+                @pressEnter="() => { this.$emit('login') }"
+            >
+              <GIcon slot="prefix" icon="icon-wodeyongchexuanzhong" />
+
+            </el-input>
+
+          </el-form-item>
+
+          <!--密码-->
+          <el-form-item prop="password">
+            <el-input
+                v-model="loginForm.password"
+                class="login-input"
+                size="large"
+                type="password"
+                placeholder="请输入密码"
+                :maxlength="20"
+                @pressEnter="() => { this.$emit('login') }"
+            >
+              <GIcon slot="prefix" icon="icon-mimadenglu" />
+
+            </el-input>
+          </el-form-item>
+
+          <!--谷歌验证码-->
+          <el-form-item prop="googleCode">
+            <el-input
+                v-model="loginForm.googleCode"
+                class="login-input"
+                size="large"
+                type="password"
+                placeholder="请输入Google 6 位数验证码"
+                :maxlength="6"
+                @pressEnter="() => { this.$emit('login') }"
+            >
+              <GIcon slot="prefix" icon="icon-logo_google" />
+
+            </el-input>
+          </el-form-item>
+
+        </el-form>
+
+        <el-button class="login-button" :loading="loading" type="primary" @click="login">立即登录</el-button>
+
+      </div>
 
     </div>
 
@@ -17,49 +77,92 @@
 </template>
 
 <script>
-import loginMethods from './loginMethods'
-import { APP_NAME } from '@/config/public'
-export default {
-  name: 'Login',
-  components: {
-    loginMethods
-  },
-  data() {
-    return {
-      loginIcon01: 'translateY(-50%)',
-      loginIcon03: 'translateY(-50%)',
-      phone: '',
-      password: '',
-      componentName: 'loginMethods',
-      defaultPhone: ''
-    }
-  },
-  created() {
-    this.$setWebSite({ title: APP_NAME })
-  },
-  methods: {
-    // 移动背景图
-    moveBanner(e) {
-      let i = 0.003
-      let a = Math.floor((500 - e.clientY) * i)
-      let o = Math.floor((window.innerWidth - e.clientX) * i)
-      this.loginIcon01 = `translate(${o}%, ${-50 + a}%)`
-      i = 0.003 + 1 / 900
-      a = Math.floor((500 - e.clientY) * i)
-      o = Math.floor((window.innerWidth - e.clientX) * i)
-      this.loginIcon03 = `translate(${o}%, ${-50 + a}%)`
+  import { validationPhone } from '@/utils/validationRules'
+  import { APP_NAME } from '@/config/public'
+  import Cookie from 'js-cookie'
+  export default {
+    name: 'Login',
+    data() {
+      return {
+        APP_NAME,
+        loginIcon01: 'translateY(-50%)',
+        loginIcon03: 'translateY(-50%)',
+        componentName: 'loginMethods',
+        loginForm: {
+          username: '',
+          password: '',
+          googleCode: ''
+        },
+        loading: false,
+        rules: {
+          username: [
+            { required: true, message: '请输入账号' },
+            { validator: this.validatorAccount, trigger: 'blur' }
+          ],
+          password: [
+            { required: true, message: '请输入密码' }
+          ]
+        },
+        imgCodeTime: null
+      }
     },
-    // 修改登录方式
-    changeLoginType(value) {
-      this.defaultPhone = value
+    created() {
+      this.$setWebSite({ title: APP_NAME })
     },
-    // 清除
-    clearMoveBanner() {
-      this.loginIcon01 = 'translateY(-50%)'
-      this.loginIcon03 = 'translateY(-50%)'
+    methods: {
+      // 移动背景图
+      moveBanner(e) {
+        let i = 0.003
+        let a = Math.floor((500 - e.clientY) * i)
+        let o = Math.floor((window.innerWidth - e.clientX) * i)
+        this.loginIcon01 = `translate(${o}%, ${-50 + a}%)`
+        i = 0.003 + 1 / 900
+        a = Math.floor((500 - e.clientY) * i)
+        o = Math.floor((window.innerWidth - e.clientX) * i)
+        this.loginIcon03 = `translate(${o}%, ${-50 + a}%)`
+      },
+      // 清除
+      clearMoveBanner() {
+        this.loginIcon01 = 'translateY(-50%)'
+        this.loginIcon03 = 'translateY(-50%)'
+      },
+      // 校验账号
+      checkPhone() {
+        this.imgCodeTime = validationPhone(this.loginForm.username) ? new Date() : ''
+      },
+      // 校验表单
+      validate(callback, errBack) {
+        this.$refs.loginForm.validate(valid => {
+          if (valid) {
+            callback()
+          } else {
+            errBack()
+          }
+        })
+      },
+      // 自定义校验规则
+      validatorAccount(rule, value, callback) {
+        if (!value) callback()
+
+        if (!/^[0-9a-zA-Z]*$/.test(value)) {
+          callback('请输入正确格式的账号')
+        }
+        callback()
+      },
+      login() {
+        this.$refs.loginForm.validate(valida => {
+          if (valida) {
+            this.loading = true
+            setTimeout(() => {
+              this.loading = false
+              Cookie.set('userToken', '******')
+              this.$router.push('/')
+            }, 1000)
+          }
+        })
+      }
     }
   }
-}
 </script>
 
 <style lang="scss">
@@ -74,16 +177,6 @@ export default {
       min-height: 400px;
       .custom-tabs{
         font-size: 16px;
-        .ant-tabs-nav-animated {
-          width: 100%;
-          &>div{
-            width: 100%;
-            .ant-tabs-tab{
-              font-size: 16px;
-              margin: 0 32px;
-            }
-          }
-        }
       }
       .login-assist {
         display: flex;
@@ -118,17 +211,13 @@ export default {
       top: 50%;
       transform: translateY(-50%);
       box-shadow: var(--cardShadow);
-      .ant-form {
+      .el-form {
         margin-top: 16px;
         font-size: 14px;
-        .ant-input-prefix {
-          font-size: 18px;
-          color: rgba(0,0,0,.45);
-        }
-        .ant-input-affix-wrapper {
-          .ant-input{
-            padding-left: 34px;
-          }
+        .el-input__prefix {
+          font-size: 16px;
+          line-height: 44px;
+          padding-left: 5px;
         }
       }
       .login-input {
@@ -143,6 +232,8 @@ export default {
         line-height: 44px;
         padding: 0;
         margin-top: 20px;
+        font-size: 14px;
+        letter-spacing: 1px;
         background: #1890ff;
       }
     }

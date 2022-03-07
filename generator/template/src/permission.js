@@ -2,7 +2,7 @@ import router from './router'
 import Cookies from 'js-cookie'
 import store from './store'
 import { dynamicRouting } from './config/public'
-import { message } from 'ant-design-vue'
+import { Message } from 'element-ui'
 
 // 页面白名单
 const allowList = ['login', 'error', 'exception', 'fault']
@@ -44,7 +44,7 @@ router.beforeEach(async(to, from, next) => {
            */
           if (to.path === '/') {
             // 菜单配置错误
-            message.error('菜单配置信息错误，请联系管理员')
+            Message.error('菜单配置信息错误，请联系管理员')
           } else {
             next('exception')
           }

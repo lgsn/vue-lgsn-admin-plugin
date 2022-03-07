@@ -2,10 +2,10 @@
 <template>
   <div class="avatar-com">
 
-    <Popover v-model="visible" trigger="click" placement="bottomLeft">
-      <div slot="content" class="avatar-popover-content">
+    <Popover trigger="click" @show="visible = true" @after-leave="visible = false">
+      <div class="avatar-popover-content">
         <div class="avatar-com-header">
-          <GUploadImg v-model="info.headImg" :read-only="true" :border="true" class="avatar-com-header-img" :size="size" :avatar-text="info.userName" @click="visible = true" />
+          <GUploadImg v-model="info.headImg" :read-only="true" :border="true" class="avatar-com-header-img" :size="36" :font-size="18" :avatar-text="info.userName" @click="visible = true" />
           <span class="user-name">{{ info.userName }}</span>
         </div>
         <ul>
@@ -20,10 +20,10 @@
         </ul>
       </div>
 
-      <div class="shw-avatar">
-        <GUploadImg v-model="info.headImg" :read-only="true" :border="true" :avatar-text="info.userName" :size="size" class="avatar-com-img" @click="visible = true" />
+      <div slot="reference" class="shw-avatar">
+        <GUploadImg v-model="info.headImg" :read-only="true" :border="true" :avatar-text="info.userName" :font-size="18" :size="size" class="avatar-com-img" @click="visible = true" />
         <span class="user-name">{{ info.userName }}</span>
-        <a-icon class="show-avatar-icon" :type="visible ? 'caret-up' : 'caret-down'" />
+        <GIcon class="show-avatar-icon" :icon="visible ? 'icon-xiajiantou' : 'icon-shangjiantou'" />
       </div>
 
     </Popover>
@@ -35,42 +35,45 @@
 </template>
 
 <script>
-import { Popover } from 'ant-design-vue'
-import GUploadImg from '@/components/GUploadImg'
-import editorPwd from './editorPwd'
-export default {
-  name: 'AvatarCom',
-  components: {
-    Popover,
-    GUploadImg,
-    editorPwd
-  },
-  props: {
-    info: {
-      type: Object,
-      default: () => {}
+  import { Popover } from 'element-ui'
+  import GUploadImg from '@/components/GUploadImg'
+  import editorPwd from './editorPwd'
+  export default {
+    name: 'AvatarCom',
+    components: {
+      Popover,
+      GUploadImg,
+      editorPwd
     },
-    size: {
-      type: Number,
-      default: 36
-    }
-  },
-  data() {
-    return {
-      isEditorPwd: false,
-      visible: false
-    }
-  },
-  methods: {
-    // 退出登录
-    logOut() {
+    props: {
+      info: {
+        type: Object,
+        default: () => {}
+      },
+      size: {
+        type: Number,
+        default: 36
+      }
     },
+    data() {
+      return {
+        isEditorPwd: false,
+        visible: false
+      }
+    },
+    methods: {
+      // 退出登录
+      logOut() {
+        this.$store.dispatch('clearTokenCookie').then(() => {
+          this.$router.replace({ path: '/login' })
+        })
+      },
 
-    close() {
-      this.visible = false
+      close() {
+        this.visible = false
+      }
     }
   }
-}
 </script>
 
 <style lang="scss" scoped>
@@ -101,8 +104,10 @@ export default {
       }
     }
     .show-avatar-icon{
-      font-size: 14px;
+      transition: all .3s;
+      font-size: 13px;
       margin-left: 8px;
+      color: #37414b;
     }
   }
   .avatar-popover-content {
