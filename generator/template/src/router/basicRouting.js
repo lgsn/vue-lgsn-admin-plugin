@@ -21,16 +21,16 @@ export default [
   {
     path: '/error',
     name: 'error',
-    component: () => import('@/views/404')
+    component: () => import('@/views/pmsPage/404')
   },
   {
     path: '/exception',
     name: 'exception',
-    component: () => import('@/views/403')
+    component: () => import('@/views/pmsPage/403')
   },
   {
     path: '/fault',
     name: 'fault',
-    component: () => import('@/views/502')
+    component: () => import('@/views/pmsPage/502')
   }
 ]

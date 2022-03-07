@@ -1,6 +1,7 @@
 import { arrayTransferMap, mergeArray, arrayFilter } from '@/utils/tools'
 import { arrayToMap } from '@/utils/tools'
 import configInfo from '../../config/config'
+import Cookie from 'js-cookie'
 
 const state = {
   userInfo: {},
@@ -43,16 +44,16 @@ const mutations = {
 const actions = {
   // 获取用户信息
   async getUserInfo({ commit }) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       /**
        * 这里是mock数据
        * 正常情况下你应该使用API来获取当前用户信息
        */
-      // 当前登录用户信息
-      const response = {
-        'id': '1995',
-        'userName': '开关'
-      }
+        // 当前登录用户信息
+      const userInfo = {
+          'id': '1995',
+          'userName': '开关'
+        }
 
       /**
        * 顶部快速切换应用 主应用信息
@@ -85,18 +86,14 @@ const actions = {
           'configVal': '开关的百万梦想'
         }
       ]
-      const isAuth = !response.data.phoneAuth || response.data.simplePwd
       commit('setBaseAppInfo', arrayToMap(baseAppInfo.data))
-      commit('userInfo', {
-        ...response.data,
-        isAuth
-      })
+      commit('userInfo', userInfo)
       resolve()
     })
   },
   // 获取用户菜单
   getUserMenu({ commit }) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       /**
        * 这里是mock数据
        * 正常情况下你应该 接口获取
@@ -119,6 +116,14 @@ const actions = {
         commit('setUserRights', configInfo.resources)
         resolve(mergeAllMenus)
       }
+    })
+  },
+
+  // 退出登录
+  clearTokenCookie() {
+    return new Promise(resolve => {
+      Cookie.set('userToken', '')
+      resolve()
     })
   }
 }

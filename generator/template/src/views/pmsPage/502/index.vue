@@ -6,11 +6,11 @@
     </div>
 
     <div class="error-desc">
-      <p>404</p>
-      <span>抱歉，您查看的页面不存在～～</span>
+      <p>502</p>
+      <span>服务器睡着了～～～ 快去叫醒它吧。</span>
       <div class="error-desc-btn">
-        <a-button size="large" @click="() => { this.$router.push('/') }">返回首页</a-button>
-        <a-button type="primary" size="large" @click="() => { this.$router.go(-2) }">返回上页</a-button>
+        <el-button size="large" @click="() => { this.$router.push('/') }">返回首页</el-button>
+        <el-button type="primary" size="large" @click="() => { this.$router.go(-2) }">返回上页</el-button>
       </div>
     </div>
 
@@ -19,7 +19,10 @@
 
 <script>
 export default {
-  name: 'ErrorView'
+  name: 'Exception',
+  created() {
+    this.$setWebSite({ title: `502` })
+  }
 }
 </script>
 
@@ -35,8 +38,10 @@ export default {
     .error-icon{
       width: 60%;
       text-align: center;
+      height: 320px;
     }
     .error-desc{
+      height: 320px;
       p{
         font-size: 100px;
         color: #409EFF;

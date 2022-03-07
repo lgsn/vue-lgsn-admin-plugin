@@ -1,9 +1,10 @@
 import axios from 'axios'
-import { message } from 'ant-design-vue'
+import { Message } from 'element-ui'
 import Router from '../router'
+import store from '@/store'
 
 // 公用前缀
-const baseURL = '/api'
+const baseURL = '/'
 
 axios.interceptors.response.use(response => {
   return response
@@ -15,19 +16,42 @@ axios.interceptors.response.use(response => {
 function checkResponse(response) {
   // 校验HTTP 状态
   if (response && ([200, 304, 400].includes(Number(response.status)))) {
+    const code = response.data.code
+    if (code === '000') {
+      return response.data
+    } else if (code === '102') {
+      Message.error('登录失效, 请重新登录')
+      store.dispatch('clearTokenCookie').then(() => {
+        Router.replace({ path: '/login' })
+      })
+      return Promise.reject(response.data)
+    } else if (code === '10001') {
+      Message.error('账户已禁用')
+      store.dispatch('clearTokenCookie').then(() => {
+        Router.replace({ path: '/login' })
+      })
+      return Promise.reject(response.data)
+    } else if (response.data instanceof Blob) {
+      return response
+    } else {
+      Message.error(response.data.msg)
+      return Promise.reject(response.data)
+    }
     // 校验业务CODE
-    return response.data
+  } else {
+    Message.error('服务睡着了啦，快去叫醒它吧。')
+    return Promise.reject()
   }
-  message.error('服务睡着了啦，快去叫醒它吧。')
-  return Promise.reject()
 }
 
-const http = (method, url, data) => {
+const http = (method, url, data, header, config) => {
   const request = {
     method: '',
     url,
     baseURL,
-    headers: { clientType: 'browser' },
+    headers: {
+      ...header
+    },
     timeout: 60000
   }
   if (method === 'GET') {
@@ -47,7 +71,8 @@ const http = (method, url, data) => {
     return axios({
       ...request,
       method: 'post',
-      data: data
+      data: data,
+      ...config
     }).then(response => (checkResponse(response))).catch(res => {
       if (res === undefined) {
         Router.push('fault')

@@ -11,7 +11,7 @@ import store from '@/store'
  * 复制
  */
 Vue.directive('copy', {
-  bind: function(el, binding, vnode) {
+  bind: function(el) {
     const copyValue = el.innerText
     el.innerHTML = `
       <div class="g-copy" id="GCopy">
@@ -44,10 +44,9 @@ Vue.directive('copy', {
 
 /**
  * 权限按钮
- * <div v-rights='1995'>编辑</>
  */
 Vue.directive('rights', {
-  inserted: function(el, binding, vnode) {
+  inserted: function(el, binding) {
     const userRights = store.getters.userRights
     if (!userRights.get(binding.value)) {
       el.parentNode.removeChild(el)

@@ -6,11 +6,11 @@
     </div>
 
     <div class="error-desc">
-      <p>403</p>
-      <span>抱歉，您暂无权限～～</span>
+      <p>404</p>
+      <span>抱歉，您查看的页面不存在～～</span>
       <div class="error-desc-btn">
-        <a-button size="large" @click="() => { this.$router.push('/') }">返回首页</a-button>
-        <a-button type="primary" size="large" @click="() => { this.$router.go(-2) }">返回上页</a-button>
+        <el-button size="large" @click="() => { this.$router.push('/') }">返回首页</el-button>
+        <el-button type="primary" size="large" @click="() => { this.$router.go(-2) }">返回上页</el-button>
       </div>
     </div>
 
@@ -19,7 +19,10 @@
 
 <script>
 export default {
-  name: 'Exception'
+  name: 'ErrorView',
+  created() {
+    this.$setWebSite({ title: `404` })
+  }
 }
 </script>
 
