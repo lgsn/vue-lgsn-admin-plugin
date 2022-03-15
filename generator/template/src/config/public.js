@@ -12,4 +12,7 @@
 export const dynamicRouting = '/dynamicRouting'
 
 // 系统名称
-export const APP_NAME = '开关的百万梦想'
+export const APP_NAME = 'element-mini'
+
+// 系统LOGO
+export const APP_LOGO = ''

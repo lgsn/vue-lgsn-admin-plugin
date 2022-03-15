@@ -2,7 +2,6 @@
   <div class="test-page">
     <div class="global-view-card">
       <p class="global-title">当看到此页面，恭喜你项目启动成功</p>
-      <p class="global-title">你应该全局搜索TODO关键词，替换<b>框架依赖的数据</b>及<b>菜单权限相关数据</b></p>
     </div>
   </div>
 </template>

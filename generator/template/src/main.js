@@ -6,7 +6,7 @@ import './utils/ElCom'
 import 'element-ui/lib/theme-chalk/index.css'
 import './styles/global.scss'
 import './permission'
-import './utils/kgIcon'
+import './utils/proIcon'
 import './utils/directive'
 import { setWebSiteConfig } from './utils/tools'
 

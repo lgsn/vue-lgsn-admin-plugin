@@ -7,7 +7,6 @@ const state = {
   userMenu: [],
   userRights: new Map(),
   roles: false,
-  appInfo: {},
   defaultPath: ''
 }
 
@@ -28,9 +27,6 @@ const mutations = {
   setRoles: (state, data) => {
     state.roles = data
   },
-  setAppInfo: (state, data) => {
-    state.appInfo = data
-  },
   setUserRights: (state, data) => {
     state.userRights = arrayTransferMap(data, 'code')
   }
@@ -46,9 +42,9 @@ const actions = {
        */
         // 当前登录用户信息
       const userInfo = {
-        'id': '1995',
-        'userName': '开关'
-      }
+          'id': '1995',
+          'userName': '开关'
+        }
       commit('userInfo', userInfo)
       resolve()
     })
@@ -62,13 +58,8 @@ const actions = {
        */
       const mockFlag = true
       if (mockFlag) {
-        // 当前系统信息
-        const appInfo = configInfo.app
         // 合并所有菜单
         const mergeAllMenus = mergeArray(configInfo.menus, configInfo.authMenus)
-
-        // 当前应用信息
-        commit('setAppInfo', appInfo)
 
         // 过滤左侧菜单数据 并剔除不需要展示的菜单
         const filterAuthMenus = arrayFilter(JSON.parse(JSON.stringify(configInfo.menus)))
