@@ -65,11 +65,8 @@ export function mergeArray(data, newData) {
   return data
 }
 
-// 转换map
+// 数组转换为 Map格式
 export function arrayTransferMap(data, key = 'key', result = new Map()) {
-  /**
-   * isAllValue
-   */
   const info = result
   if (data) {
     data.forEach(v => {

@@ -17,7 +17,7 @@ const configInfo = {
     'appName': '开关的百万梦想', // 左上角名称
     'iconUrl': '', // 左上角图标
     'linkUrl': '', // 点击左上角跳转地址
-    'tabIcon': '', // 网页标题栏图标
+    'tabIcon': '', // 网页Ico
     'tabTitle': '控制中心' // 网页标题
   }
 }

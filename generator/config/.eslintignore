@@ -2,6 +2,5 @@ build/*.js
 src/assets
 public
 dist
-/src/utils/iconfont.js
-/src/utils/layoutIcon.js
+/src/utils/proIcon.js
 /src/view/config

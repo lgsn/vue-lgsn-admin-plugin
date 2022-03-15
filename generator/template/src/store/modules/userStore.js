@@ -1,5 +1,4 @@
 import { arrayTransferMap, mergeArray, arrayFilter } from '@/utils/tools'
-import { arrayToMap } from '@/utils/tools'
 import configInfo from '../../config/config'
 import Cookie from 'js-cookie'
 
@@ -9,7 +8,6 @@ const state = {
   userRights: new Map(),
   roles: false,
   appInfo: {},
-  baseAppInfo: {},
   defaultPath: ''
 }
 
@@ -33,9 +31,6 @@ const mutations = {
   setAppInfo: (state, data) => {
     state.appInfo = data
   },
-  setBaseAppInfo: (state, data) => {
-    state.baseAppInfo = data
-  },
   setUserRights: (state, data) => {
     state.userRights = arrayTransferMap(data, 'code')
   }
@@ -51,42 +46,9 @@ const actions = {
        */
         // 当前登录用户信息
       const userInfo = {
-          'id': '1995',
-          'userName': '开关'
-        }
-
-      /**
-       * 顶部快速切换应用 主应用信息
-       * 你也可以不使用此数据格式 修改以下方法
-       * commit('setBaseAppInfo', arrayToMap(baseAppInfo.data))
-       */
-      const baseAppInfo = [
-        {
-          'configCode': 'appIcon',
-          'configVal': ''
-        },
-        {
-          'configCode': 'appName',
-          'configVal': '开关的百万梦想'
-        },
-        {
-          'configCode': 'banner',
-          'configVal': 'http://kaifa.baidu.com'
-        },
-        {
-          'configCode': 'link',
-          'configVal': 'http://kaifa.baidu.com'
-        },
-        {
-          'configCode': 'tabIcon',
-          'configVal': 'http://kaifa.baidu.com'
-        },
-        {
-          'configCode': 'tabTitle',
-          'configVal': '开关的百万梦想'
-        }
-      ]
-      commit('setBaseAppInfo', arrayToMap(baseAppInfo.data))
+        'id': '1995',
+        'userName': '开关'
+      }
       commit('userInfo', userInfo)
       resolve()
     })
@@ -100,20 +62,26 @@ const actions = {
        */
       const mockFlag = true
       if (mockFlag) {
+        // 当前系统信息
         const appInfo = configInfo.app
-        // 合并筛选菜单权限
+        // 合并所有菜单
         const mergeAllMenus = mergeArray(configInfo.menus, configInfo.authMenus)
+
         // 当前应用信息
         commit('setAppInfo', appInfo)
-        // 已授权用户菜单
-        // 过滤左侧菜单数据 剔除不需要展示的菜单
+
+        // 过滤左侧菜单数据 并剔除不需要展示的菜单
         const filterAuthMenus = arrayFilter(JSON.parse(JSON.stringify(configInfo.menus)))
-        // 设置左侧菜单
+
+        // 设置当前用户 已授权/可见 菜单
         commit('setUserMenu', filterAuthMenus)
-        // 菜单权限标识
+
+        // 当前用户是否已获取过菜单
         commit('setRoles', true)
-        // 用户操作权限
-        commit('setUserRights', configInfo.resources)
+
+        // 用户页面按钮权限
+        commit('setUserRights', [])
+
         resolve(mergeAllMenus)
       }
     })

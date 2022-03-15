@@ -28,10 +28,13 @@ export default {
     generateRoutes({ commit }, data) {
       return new Promise(resolve => {
         const routeRights = new Map()
-        // 生成路由数据格式
+        // 菜单数据格式修改为 路由数据格式
         const accessedRoutes = routerComponents(data, routeRights)
+        // 在全部菜单中标识当前用户是否可访问此菜单
         arrayTransferMap(basicRouting, 'name', routeRights)
+        // 全部路由
         commit('setRoutes', accessedRoutes)
+        // 菜单路由权限
         commit('setRouteRightsMap', routeRights)
         resolve(accessedRoutes)
       })
