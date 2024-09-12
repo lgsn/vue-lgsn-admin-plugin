@@ -1,6 +1,6 @@
 {
   "name": "vue-cli-plugin-lgsnadmin",
-  "version": "0.0.1",
+  "version": "0.0.11",
   "main": "index.js",
   "author": "开关 <gltwork@163.com>",
   "license": "MIT License",
@@ -8,7 +8,7 @@
   "description": "vue-lgsn-admin 简约版",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Akryum/vue-cli-plugin-apollo.git"
+    "url": "https://github.com/lgsn/vue-lgsn-admin-plugin.git"
   },
   "homepage": "https://lgsn.github.io/vue-lgsn-admin-docs/"
 }
