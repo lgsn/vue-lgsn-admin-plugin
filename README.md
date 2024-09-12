@@ -1,8 +1,8 @@
-# vue-lgsn-admin-plugin
+# vue-cli-plugin-lgsnadmin
 
 [vue-lgsn-admin](https://lgsn.github.io/vue-lgsn-admin-docs/)
 
-##### vue-lgsn-admin-plugin 简约框架
+##### vue-cli-plugin-lgsnadmin 简约框架
 
 #### 🚀 安装
 ```bash

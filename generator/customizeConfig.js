@@ -28,5 +28,5 @@ module.exports = function () {
     })
   })
 
-  console.log('🚁 vue-lgsn-admin-plugin 项目目录初始化完成')
+  console.log('🚁 vue-cli-plugin-lgsnadmin 项目目录初始化完成')
 }
