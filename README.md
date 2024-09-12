@@ -6,12 +6,12 @@
 
 #### 🚀 安装
 ```bash
-$ npm i --save-dev vue-lgsn-admin-plugin
+$ npm i --save-dev vue-cli-plugin-lgsnadmin
 ```
 
 #### 🚀 使用
 ```bash
-$ vue invoke vue-lgsn-admin-plugin
+$ vue invoke vue-cli-plugin-lgsnadmin
 ```
 
 #### run serve报错 尝试以下解决方案
