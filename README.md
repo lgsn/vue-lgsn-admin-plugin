@@ -1,15 +1,17 @@
-# vue-cli-plugin-work
+# vue-lgsn-admin-plugin
 
-##### vue-cli-plugin-work 工作台UI框架
+[vue-lgsn-admin](https://lgsn.github.io/vue-lgsn-admin-docs/)
+
+##### vue-lgsn-admin-plugin 简约框架
 
 #### 🚀 安装
 ```bash
-$ npm i --save-dev vue-cli-plugin-work
+$ npm i --save-dev vue-lgsn-admin-plugin
 ```
 
 #### 🚀 使用
 ```bash
-$ vue invoke vue-cli-plugin-work
+$ vue invoke vue-lgsn-admin-plugin
 ```
 
 #### run serve报错 尝试以下解决方案

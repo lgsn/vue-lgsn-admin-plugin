@@ -12,7 +12,7 @@
 export const dynamicRouting = '/dynamicRouting'
 
 // 系统名称
-export const APP_NAME = 'element-mini'
+export const APP_NAME = 'vue-lgsn-admin'
 
 // 系统LOGO
 export const APP_LOGO = ''
